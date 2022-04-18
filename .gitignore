@@ -4,8 +4,8 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 .idea/
-Core/bin/
-Core/obj/
-Sandbox/bin/
-Sandbox/obj
+Mynad/bin/
+Mynad/obj/
+Sandbox/**/
+!Sandbox/Sandbox.csproj
 .DS_Store

@@ -4,3 +4,7 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 .idea/
+Core/bin/
+Core/obj/
+Sandbox/bin/
+Sandbox/obj

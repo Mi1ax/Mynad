@@ -8,3 +8,4 @@ Core/bin/
 Core/obj/
 Sandbox/bin/
 Sandbox/obj
+.DS_Store

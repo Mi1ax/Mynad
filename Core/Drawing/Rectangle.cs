@@ -8,90 +8,40 @@ using ColorRAY = Raylib_CsLo.Color;
 
 namespace Core.Drawing
 {
-    public class Rectangle
+    public class Rectangle : Shape
     {
-        private RectangleRay _rectangle;
-        private ColorRAY _color;
-        private Vector2 _origin;
-        private ColorRAY? _borderColor;
-
-        public Vector2 Position
-        {
-            get => new (_rectangle.x, _rectangle.y);
-            set
-            {
-                _rectangle.x = value.X;
-                _rectangle.y = value.Y;
-            }
-        }
-
-        public Vector2 Origin
-        {
-            get => _origin;
-            set => _origin = value;
-        }
-        
-        public Size Size
-        {
-            get => new ((int)_rectangle.width, (int)_rectangle.height);
-            set
-            {
-                _rectangle.width = value.Width;
-                _rectangle.height = value.Height;
-            }
-        }
-
-        public Vector2 Center => new(
-            _rectangle.x + _rectangle.width / 2, 
-            _rectangle.y + _rectangle.height / 2);
-
-        public ColorSYS FillColor
-        {
-            get => Utils.GetColorSysFromRay(_color);
-            set => _color = Utils.GetColorRayFromSys(value);
-        }
-
-        public ColorSYS BorderColor
-        {
-            get => _borderColor != null ? Utils.GetColorSysFromRay(_borderColor.Value) : Color.Transparent;
-            set => _borderColor = Utils.GetColorRayFromSys(value);
-        }
-
-        public float BorderThickness { get; init; }
-
         #region Contractors
 
-        public Rectangle()
+        public Rectangle() { }
+
+        public Rectangle(float x, float y, float width, float height)
         {
-            _rectangle = new RectangleRay();
+            Position = new Vector2(x, y);
+            Size = new SizeF(width, height);
         }
 
-        public Rectangle(int x, int y, int width, int hieght)
+        public Rectangle(Vector2 position, SizeF size)
         {
-            _rectangle = new RectangleRay(x, y, width, hieght);
-        }
-
-        public Rectangle(Vector2 position, Size size)
-        {
-            _rectangle = new RectangleRay(
-                position.X, position.Y, 
-                size.Width, size.Height);
+            Position = position;
+            Size = size;
         }
 
         #endregion
 
         public void Draw()
         {
-            DrawRectanglePro(_rectangle, _origin, 0f, _color);
-            if (_borderColor != null)
+            DrawRectanglePro(
+                new RectangleRay(Position.X, Position.Y, Size.Width, Size.Height), 
+                Origin, 0f, ColorRay);
+            if (BorderColor != Color.Transparent && BorderColorRay != null)
                 DrawRectangleLinesEx(
                     new RectangleRay(
-                        _rectangle.x - _origin.X, 
-                        _rectangle.y - _origin.Y,
-                        _rectangle.width,
-                        _rectangle.height
+                        Position.X - Origin.X, 
+                        Position.Y - Origin.Y,
+                        Size.Width,
+                        Size.Height
                         ), 
-                    BorderThickness, _borderColor.Value);
+                    BorderThickness, BorderColorRay.Value);
         }
     }
 }

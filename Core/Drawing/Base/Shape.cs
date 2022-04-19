@@ -1,6 +1,6 @@
 using System.Drawing;
 using System.Numerics;
-
+using Core.Drawing.Base;
 using static Raylib_CsLo.Raylib;
 using RectangleRay = Raylib_CsLo.Rectangle;
 using ColorSYS = System.Drawing.Color;
@@ -8,7 +8,7 @@ using ColorRAY = Raylib_CsLo.Color;
 
 namespace Core.Drawing
 {
-    public abstract class Shape
+    public abstract class Shape : IDrawable
     {
         protected ColorRAY ColorRay;
         protected ColorRAY? BorderColorRay;
@@ -43,5 +43,7 @@ namespace Core.Drawing
             BorderColor = Color.Transparent;
             FillColor = Color.Transparent;
         }
+        
+        public abstract void Draw();
     }
 }

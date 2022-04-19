@@ -1,11 +1,7 @@
-using System.Drawing;
 using System.Numerics;
-using Raylib_CsLo;
 using static Raylib_CsLo.Raylib;
-using ColorSYS = System.Drawing.Color;
-using ColorRAY = Raylib_CsLo.Color;
 
-namespace Core.Drawing
+namespace Core.Drawing.Shapes
 {
     public class Circle : Shape
     {
@@ -24,8 +20,8 @@ namespace Core.Drawing
             Position = position;
             Size = radius;
         }
-        
-        public void Draw()
+
+        public override void Draw()
         {
             DrawCircle((int)Position.X, (int)Position.Y, Size, ColorRay);
         }

@@ -1,12 +1,9 @@
 ﻿using System.Drawing;
 using System.Numerics;
-
 using static Raylib_CsLo.Raylib;
 using RectangleRay = Raylib_CsLo.Rectangle;
-using ColorSYS = System.Drawing.Color;
-using ColorRAY = Raylib_CsLo.Color;
 
-namespace Core.Drawing
+namespace Core.Drawing.Shapes
 {
     public class Rectangle : Shape
     {
@@ -27,8 +24,8 @@ namespace Core.Drawing
         }
 
         #endregion
-
-        public void Draw()
+        
+        public override void Draw()
         {
             DrawRectanglePro(
                 new RectangleRay(Position.X, Position.Y, Size.Width, Size.Height), 

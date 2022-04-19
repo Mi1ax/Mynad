@@ -1,10 +1,9 @@
 ﻿using System.Numerics;
 using Raylib_CsLo;
-
 using ColorRAY = Raylib_CsLo.Color;
 using ColorSYS = System.Drawing.Color;
 
-namespace Core.Drawing
+namespace Core.Drawing.Shapes
 {
     public class Line
     {

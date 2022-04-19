@@ -1,10 +1,14 @@
+using Raylib_CsLo;
+using static Raylib_CsLo.RayGui;
+using static Raylib_CsLo.Raylib;
+
 namespace Core.Drawing.GUI
 {
     public struct FontSize
     {
-        public const float Default = 10f;
-        public const float Medium = 15f;
-        public const float Big = 20f;
-        public const float Multiplier = 5f;
+        public static readonly float Default = GuiGetStyle((int)GuiControl.DEFAULT, (int)GuiDefaultProperty.TEXT_SIZE);
+        public static readonly float Medium = Default + Multiplier;
+        public static readonly float Big = Default + Multiplier * 2;
+        public const float Multiplier = 10f;
     }
 }

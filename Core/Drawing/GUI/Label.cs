@@ -36,10 +36,10 @@ namespace Core.Drawing.GUI
             }
         }
 
-        public Label(string text, float fontSize = FontSize.Big)
+        public Label(string text, float? fontSize = null)
         {
             _text = text;
-            _fontSize = fontSize;
+            _fontSize = fontSize ?? FontSize.Big;
             InitRectangle();
         }
 
@@ -51,7 +51,7 @@ namespace Core.Drawing.GUI
         
         private void InitRectangle() 
         {
-            _font = GuiGetFont();
+            _font = GetFontDefault();
             _textSize = MeasureTextEx(_font, _text, _fontSize, 2f);
             _rectangle = new RectangleRay(0, 0, _textSize.X, _textSize.Y);
         }
@@ -63,7 +63,6 @@ namespace Core.Drawing.GUI
 
         public void Draw()
         {
-            DrawRectangleRec(_rectangle, RED);
             DrawTextEx(_font, _text, new Vector2(_rectangle.x, _rectangle.y), _fontSize, 2f, BLACK);
         }
     }

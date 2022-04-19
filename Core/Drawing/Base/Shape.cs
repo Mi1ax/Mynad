@@ -1,12 +1,9 @@
 using System.Drawing;
 using System.Numerics;
-using Core.Drawing.Base;
-using static Raylib_CsLo.Raylib;
-using RectangleRay = Raylib_CsLo.Rectangle;
 using ColorSYS = System.Drawing.Color;
 using ColorRAY = Raylib_CsLo.Color;
 
-namespace Core.Drawing
+namespace Core.Drawing.Base
 {
     public abstract class Shape : IDrawable
     {

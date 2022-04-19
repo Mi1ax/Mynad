@@ -1,4 +1,6 @@
-﻿using ColorRAY = Raylib_CsLo.Color;
+﻿using System.Text.RegularExpressions;
+using Raylib_CsLo;
+using ColorRAY = Raylib_CsLo.Color;
 using ColorSYS = System.Drawing.Color;
 
 namespace Core
@@ -10,6 +12,15 @@ namespace Core
 
         public static ColorSYS GetColorSysFromRay(ColorRAY rayColor) =>
             ColorSYS.FromArgb(rayColor.a, rayColor.r, rayColor.g, rayColor.b);
+
+        public static string GetPath(string relativePath)
+        {
+            var appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            var pattern = @"^(.+\\)(.+exe)$";
+            var regex = new Regex(pattern, RegexOptions.None);
+            var match = regex.Match(appPath);
+            return System.IO.Path.GetFullPath(match.Groups[1].Value + relativePath);
+        }
     }
     
     public struct Margin

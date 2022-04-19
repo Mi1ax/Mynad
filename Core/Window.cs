@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
 using Raylib_CsLo;
 using static Raylib_CsLo.Raylib;
@@ -8,6 +9,8 @@ namespace Core
 {
     public abstract class Window
     {
+        public static readonly Dictionary<string, Font> Fonts = new ();
+
         protected static bool IsMouseButtonPressed(Input.MouseButton mouseButton) =>
             Raylib.IsMouseButtonPressed((int)mouseButton);
 
@@ -17,6 +20,7 @@ namespace Core
         protected WindowSettings Settings;
         
         private RenderTexture _target;
+        private bool _isRunning;
         private int _scale;
         
         protected Window()
@@ -26,14 +30,14 @@ namespace Core
                 Title = "Default Title",
                 Width = 1280,
                 Height = 720,
-                VWidth = 1280 / 2,
-                VHeight = 720 / 2,
                 Color = Utils.GetColorSysFromRay(RAYWHITE)
             };
             InitWindow(Settings.Width, Settings.Height, Settings.Title);
             SetTargetFPS(75);
             GuiLoadStyleDefault();
+            GuiSetStyle((int)GuiControl.DEFAULT, (int)GuiDefaultProperty.TEXT_SIZE, 20);
             InitVirtualSize();
+            _isRunning = true;
         }
         
         private void InitVirtualSize() 
@@ -49,14 +53,16 @@ namespace Core
             SetMouseScale(1f / _scale, 1f / _scale);
         }
 
-        public WindowSettings GetSettings() => Settings; 
+        public WindowSettings GetSettings() => Settings;
+
+        public void Close() => _isRunning = false;
         
         protected abstract void Update(float deltaTime);
         protected abstract void Draw();
 
         public void Run()
         {
-            while (!WindowShouldClose())
+            while (!WindowShouldClose() && _isRunning)
             {
                 Update(GetFrameTime());
                 BeginTextureMode(_target);
@@ -78,6 +84,10 @@ namespace Core
                     WHITE);
                 EndDrawing();
             }
+
+            foreach (var (_, font) in Fonts)
+                UnloadFont(font);
+            
             UnloadTexture(_target.texture);
             CloseWindow();
         }

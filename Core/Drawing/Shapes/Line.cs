@@ -36,6 +36,14 @@ namespace Core.Drawing.Shapes
             PositionTo = new Vector2(x2, y2);
         }
 
+        public Line()
+        {
+            Color = ColorSYS.White;
+            PositionTo = Vector2.Zero;
+            PositionFrom = Vector2.Zero;
+            Thickness = 2;
+        }
+
         public bool IsIn(Vector2 position, float thickness = 6f)
         {
             var m = (PositionTo.Y - PositionFrom.Y) / (PositionTo.X - PositionFrom.X);

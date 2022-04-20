@@ -7,6 +7,7 @@ using static Raylib_CsLo.RayGui;
 using RectangleRay = Raylib_CsLo.Rectangle;
 using ColorRAY = Raylib_CsLo.Color;
 using ColorSYS = System.Drawing.Color;
+using Rectangle = Core.Drawing.Shapes.Rectangle;
 
 namespace Core.Drawing.GUI
 {
@@ -15,14 +16,31 @@ namespace Core.Drawing.GUI
         private string _text;
         private RectangleRay _rectangle;
         private Font _font;
-        private float _fontSize;
         private Vector2 _textSize;
         private ColorRAY _color = BLACK;
 
-        public string Text => _text;
-        
+        public float FSize { get; }
+
+        public string Text
+        {
+            get => _text;
+            set => _text = value;
+        }
+
         public bool IsCenter { get; set; }
-        
+
+        public Rectangle Rectangle
+        {
+            get => new(_rectangle.x, _rectangle.y, _rectangle.width, _rectangle.height);
+            set
+            {
+                _rectangle.x = value.Position.X;
+                _rectangle.y = value.Position.Y;
+                _rectangle.width = value.Size.Width;
+                _rectangle.height = value.Size.Height;
+            }
+        }
+
         public Vector2 Position
         {
             get => new (_rectangle.x, _rectangle.y);
@@ -60,7 +78,7 @@ namespace Core.Drawing.GUI
         public Label(string text, float? fontSize = null)
         {
             _text = text;
-            _fontSize = fontSize ?? FontSize.Big;
+            FSize = fontSize ?? FontSize.Big;
             InitRectangle();
         }
 
@@ -73,7 +91,7 @@ namespace Core.Drawing.GUI
         private void InitRectangle() 
         {
             _font = GetFontDefault();
-            _textSize = MeasureTextEx(_font, _text, _fontSize, 2f);
+            _textSize = MeasureTextEx(_font, _text, FSize, 2f);
             _rectangle = new RectangleRay(0, 0, _textSize.X, _textSize.Y);
         }
         
@@ -84,7 +102,7 @@ namespace Core.Drawing.GUI
 
         public void Draw()
         {
-            DrawTextEx(_font, _text, new Vector2(_rectangle.x, _rectangle.y), _fontSize, 2f, _color);
+            DrawTextEx(_font, _text, new Vector2(_rectangle.x, _rectangle.y), FSize, 2f, _color);
         }
     }
 }

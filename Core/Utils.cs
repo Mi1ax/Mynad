@@ -1,7 +1,9 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Numerics;
+using System.Text.RegularExpressions;
 using Raylib_CsLo;
 using ColorRAY = Raylib_CsLo.Color;
 using ColorSYS = System.Drawing.Color;
+using Rectangle = Core.Drawing.Shapes.Rectangle;
 
 namespace Core
 {
@@ -21,6 +23,10 @@ namespace Core
             var match = regex.Match(appPath);
             return System.IO.Path.GetFullPath(match.Groups[1].Value + relativePath);
         }
+
+        public static bool IsInRect(Rectangle rectangle, Vector2 position) =>
+            position.X > rectangle.Position.X && position.X < rectangle.Position.X + rectangle.Size.Width &&
+            position.Y > rectangle.Position.Y && position.Y < rectangle.Position.Y + rectangle.Size.Height;
     }
     
     public struct Margin

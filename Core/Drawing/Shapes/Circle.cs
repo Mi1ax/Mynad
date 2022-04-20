@@ -27,9 +27,12 @@ namespace Core.Drawing.Shapes
 
         public override void Draw()
         {
-            DrawCircle((int)Position.X, (int)Position.Y, Size, ColorRay);
             if (BorderColorRay != null)
-                DrawCircleLines((int)Position.X, (int)Position.Y, Size, BorderColorRay.Value);
+            {
+                DrawCircle((int) Position.X, (int) Position.Y, Size, BorderColorRay.Value);
+                DrawCircle((int) Position.X, (int) Position.Y, Size - 5, ColorRay);
+            }
+            else DrawCircle((int)Position.X, (int)Position.Y, Size, ColorRay);
         }
     }
 }

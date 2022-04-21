@@ -30,7 +30,7 @@ namespace Core.Drawing.Shapes
             if (BorderColorRay != null)
             {
                 DrawCircle((int) Position.X, (int) Position.Y, Size, BorderColorRay.Value);
-                DrawCircle((int) Position.X, (int) Position.Y, Size - 5, ColorRay);
+                DrawCircle((int) Position.X, (int) Position.Y, Size - BorderThickness, ColorRay);
             }
             else DrawCircle((int)Position.X, (int)Position.Y, Size, ColorRay);
         }

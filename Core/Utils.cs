@@ -15,15 +15,6 @@ namespace Core
         public static ColorSYS GetColorSysFromRay(ColorRAY rayColor) =>
             ColorSYS.FromArgb(rayColor.a, rayColor.r, rayColor.g, rayColor.b);
 
-        public static string GetPath(string relativePath)
-        {
-            var appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            var pattern = @"^(.+\\)(.+exe)$";
-            var regex = new Regex(pattern, RegexOptions.None);
-            var match = regex.Match(appPath);
-            return System.IO.Path.GetFullPath(match.Groups[1].Value + relativePath);
-        }
-
         public static bool IsInRect(Rectangle rectangle, Vector2 position) =>
             position.X > rectangle.Position.X && position.X < rectangle.Position.X + rectangle.Size.Width &&
             position.Y > rectangle.Position.Y && position.Y < rectangle.Position.Y + rectangle.Size.Height;

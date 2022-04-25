@@ -55,6 +55,23 @@ namespace Core.Drawing.GUI
             _rectangle = new RectangleRay(position.X, position.Y, size.X + 15, size.Y + 15);
         }
         
+        public Button(SizeF size, string text)
+        {
+            _text = text;
+            _rectangle = new RectangleRay(0, 0, size.Width + 15, size.Height + 15);
+        }
+        
+        public Button(string text)
+        {
+            _text = text;
+            var size = MeasureTextEx(
+                GuiGetFont(), 
+                _text, 
+                GuiGetStyle((int)GuiControl.DEFAULT, (int)GuiDefaultProperty.TEXT_SIZE), 
+                2f);
+            _rectangle = new RectangleRay(0, 0, size.X + 15, size.Y + 15);
+        }
+        
         public void Update(float deltaTime)
         {
             
@@ -68,5 +85,7 @@ namespace Core.Drawing.GUI
                     OnButtonPressed?.Invoke();
             if (Disable) GuiSetState((int)GuiControlState.GUI_STATE_NORMAL);
         }
+
+        public IUiObject Copy() => MemberwiseClone() as Button;
     }
 }

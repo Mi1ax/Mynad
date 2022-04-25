@@ -61,5 +61,7 @@ namespace Core.Drawing.GUI
         {
             _isChecked = GuiCheckBox(_rectangle, _text, _isChecked);
         }
+
+        public IUiObject Copy() => MemberwiseClone() as CheckBox;
     }
 }

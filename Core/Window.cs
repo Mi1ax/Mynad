@@ -16,6 +16,12 @@ namespace Core
 
         protected static Vector2 GetMousePosition() =>
             Raylib.GetMousePosition();
+
+        protected static void SetTargetFPS(int fps) =>
+            Raylib.SetTargetFPS(fps);
+        
+        protected static int GetFPS() => 
+            Raylib.GetFPS();
         
         protected WindowSettings Settings;
         
@@ -30,7 +36,8 @@ namespace Core
                 Title = "Default Title",
                 Width = 1280,
                 Height = 720,
-                Color = Utils.GetColorSysFromRay(RAYWHITE)
+                Color = Utils.GetColorSysFromRay(RAYWHITE),
+                OnVirtualSizeChanged = InitVirtualSize
             };
             InitWindow(Settings.Width, Settings.Height, Settings.Title);
             SetTargetFPS(75);
@@ -66,7 +73,7 @@ namespace Core
             {
                 Update(GetFrameTime());
                 BeginTextureMode(_target);
-                ClearBackground(BLACK);
+                ClearBackground(Utils.GetColorRayFromSys(Settings.Color));
                 Draw();
                 EndTextureMode();
                 

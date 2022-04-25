@@ -104,5 +104,7 @@ namespace Core.Drawing.GUI
         {
             DrawTextEx(_font, _text, new Vector2(_rectangle.x, _rectangle.y), FSize, 2f, _color);
         }
+
+        public IUiObject Copy() => MemberwiseClone() as Label;
     }
 }

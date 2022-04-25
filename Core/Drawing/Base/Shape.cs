@@ -30,7 +30,7 @@ namespace Core.Drawing.Base
             set => BorderColorRay = Utils.GetColorRayFromSys(value);
         }
 
-        public float BorderThickness { get; init; }
+        public float BorderThickness { get; set; }
 
         protected Shape()
         {
